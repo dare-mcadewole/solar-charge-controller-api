@@ -1,4 +1,4 @@
-from .controllers.component import ComponentController
+from controllers.component import ComponentController
 
 class Router:
     @staticmethod

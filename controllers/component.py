@@ -1,4 +1,9 @@
+from flask_json import as_json
+
 class ComponentController:
     @staticmethod
-    def get_controller (component):
-        return "Component is {}".format(component)
+    @as_json
+    def get_controller ():
+        return {
+            "name": "Component controller"
+        }
