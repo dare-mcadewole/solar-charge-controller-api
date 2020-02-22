@@ -8,7 +8,8 @@ class Router:
         app.add_url_rule(
             '/api/component',
             'component',
-            ComponentController.handle_component
+            ComponentController.handle_component,
+            methods=[ 'GET', 'POST' ]
         )
 
         # API rule for /api/power
