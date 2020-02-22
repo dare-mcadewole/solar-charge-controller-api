@@ -1,0 +1,2 @@
+GET http://dare:5000/api/component/exporting HTTP/1.1
+content-type: application/json
