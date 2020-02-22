@@ -1,0 +1,2 @@
+http -v GET http://dare:5000/api/component/solar_irradiance HTTP/1.1
+content-type: application/json
