@@ -1,2 +1,11 @@
-http -v GET http://dare:5000/api/component/solar_irradiance HTTP/1.1
-content-type: application/json
+// Update solar irradiance
+http PUT http://dare:5000/api/component/solar_irradiance value=91
+
+// Get Solar Irradiance
+http GET http://dare:5000/api/component/solar_irradiance
+
+// Send power value
+http POST http://dare:5000/api/power value=23
+
+// Get power value
+http GET http://dare:5000/api/power
