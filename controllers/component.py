@@ -1,8 +1,8 @@
 from flask_json import as_json
 from flask import request
 from utils.http_errors import InvalidMethod
-from utils.mongo import MongoDB
 from models.Component import Component 
+from utils.pusher_client import PusherClient
 
 ALLOWED_COMPONENTS = [
     'solar_irradiance',
@@ -29,16 +29,15 @@ class ComponentController:
             elif request.method in [ 'PUT', 'PATCH' ]:
                 value = request.get_json().get('value')
                 if value:
-                    return Component.save(component, value)
-                    # return {
-                    #     'component': component,
-                    #     'value': value
-                    # }
-                else:
+                    Component.save(component, value)
+                    PusherClient.trigger_component_update()
                     return {
-                        'description': 'Value not found',
-                        'status': 404
+                        component: value
                     }
+                return {
+                    'description': 'Value not found',
+                    'status': 404
+                }
             return InvalidMethod
         return {
             'description': 'Component \'%s\' not found' % component,

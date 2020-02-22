@@ -16,3 +16,19 @@ class PusherClient:
                 ssl=True
             )
         return PusherClient._pusher_client
+
+    @staticmethod
+    def trigger_component_update (data):
+        PusherClient.get_client().trigger(
+            'solar-charge-controller',
+            'component-update',
+            data
+        )
+
+    @staticmethod
+    def trigger_power_update (power):
+        PusherClient.get_client().trigger(
+            'solar-charge-controller',
+            'power-update',
+            power
+        )
