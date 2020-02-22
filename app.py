@@ -1,3 +1,4 @@
+#! usr/bin/python3
 import import_env_file
 import os
 from flask import Flask
