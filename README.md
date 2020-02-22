@@ -32,6 +32,8 @@ python3  app.py
 
 Base URL: [https://solarchargecontroller.herokuapp.com/api](https://solarchargecontroller.herokuapp.com/api)
 
+> You can also check test.httpie for documentation
+
 - Update Component data:  
     PUT `/api/component/<component>`  
     `<component>` can be any of 'solar_irradiance', 'exporting', 'current_usage', 'temperature', 'humidity',
