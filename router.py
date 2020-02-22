@@ -3,7 +3,7 @@ from controllers.power import PowerController
 
 class Router:
     @staticmethod
-    def setup (app):
+    def initialize (app):
         # API rule for /api/component
         app.add_url_rule(
             '/api/component/<component>',

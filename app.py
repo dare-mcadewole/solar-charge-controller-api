@@ -15,10 +15,10 @@ CORS(app, resources={
     }
 })
 # Plug Mongo
-app.config['MONGO_URI'] = os.getenv('MONGO_URI')
+
 
 # Setup routes
-Router.setup(app)
+Router.initialize(app)
 
 if __name__ == '__main__':
     # Run Application

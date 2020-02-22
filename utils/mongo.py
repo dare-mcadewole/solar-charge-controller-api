@@ -1,5 +1,5 @@
-from app import app
-from flask_pymongo import PyMongo
+from pymongo import MongoClient
+import os
 
 class MongoDB:
     _handle = None
@@ -7,6 +7,6 @@ class MongoDB:
     @staticmethod
     def get_db ():
         if not MongoDB._handle:
-            MongoDB._handle = PyMongo(app)
+            MongoDB._handle = MongoClient(os.getenv('MONGO_URI')).solar_charge_controller
         return MongoDB._handle
 
