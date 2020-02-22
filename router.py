@@ -6,15 +6,16 @@ class Router:
     def setup (app):
         # API rule for /api/component
         app.add_url_rule(
-            '/api/component',
+            '/api/component/<component>',
             'component',
             ComponentController.handle_component,
-            methods=[ 'GET', 'POST' ]
+            methods=[ 'GET', 'PUT', 'PATCH' ]
         )
 
         # API rule for /api/power
         app.add_url_rule(
             '/api/power',
             'power',
-            PowerController.handle_power
+            PowerController.handle_power,
+            methods=[ 'GET', 'POST' ]
         )

@@ -14,6 +14,8 @@ CORS(app, resources={
         'origins': '*'
     }
 })
+# Plug Mongo
+app.config['MONGO_URI'] = os.getenv('MONGO_URI')
 
 # Setup routes
 Router.setup(app)
