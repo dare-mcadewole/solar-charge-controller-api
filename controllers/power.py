@@ -1,18 +1,17 @@
-from flask_json import as_json
 from flask import request
+from flask_json import as_json
 from utils.http_errors import InvalidMethod
 
-class ComponentController:
+class PowerController:
     @staticmethod
     @as_json
-    def handle_component ():
+    def handle_power ():
         if request.method == 'GET':
-            print("Request method: ", request.args)
             return {
-                'name': 'GET /controller'
+                'name': 'GET /power'
             }
         elif request.method == 'POST':
             return {
-                'name': 'POST /controller'
+                'name': 'POST /power'
             }
         return InvalidMethod

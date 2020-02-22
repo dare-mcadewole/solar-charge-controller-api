@@ -3,4 +3,4 @@ flask==1.1.1
 import-env-file>=1
 pusher>=1
 flask_json==0.3.4
-Flask-PyMongo>=1
+Flask-PyMongo==3.9.0
