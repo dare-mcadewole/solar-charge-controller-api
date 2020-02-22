@@ -30,7 +30,10 @@ class ComponentController:
                 value = request.get_json().get('value')
                 if value:
                     Component.save(component, value)
-                    PusherClient.trigger_component_update()
+                    PusherClient.trigger_component_update({
+                        'component': component,
+                        'value': value
+                    })
                     return {
                         component: value
                     }

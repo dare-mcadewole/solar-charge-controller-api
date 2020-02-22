@@ -14,7 +14,9 @@ class PowerController:
             value = request.get_json().get('value')
             if value:
                 Power.save(value)
-                PusherClient.trigger_power_update()
+                PusherClient.trigger_power_update({
+                    'power': value
+                })
                 return {
                     'power': value
                 }
