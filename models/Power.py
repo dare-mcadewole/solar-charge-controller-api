@@ -37,11 +37,5 @@ class Power:
             } if end else date
         }
         results = MongoDB.get_db().power.find(query)
-        powerData = list()
-        for result in results:
-            del result['_id']
-            powerData.append(result)
-        print('Date: %s', date)
-        print('Query: %s', query)
-        pprint.pprint(powerData)
+        powerData = [ result['power'] for result in results ]
         return powerData

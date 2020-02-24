@@ -1,12 +1,12 @@
 // LOCAL TEST
 // Update components
-http PUT http://localhost:5000/api/components solar_irradiance=100 exporting=99 current_usage=12 temperature=48 humidity=91 depth_of_discharge=67 load=24V/2A battery_status=charging module_id=MPPT_4567
+http PUT http://localhost:5000/api/components solar_irradiance=120 exporting=84 current_usage=3 temperature=39 humidity=91 depth_of_discharge=67 load=24V/1.5A battery_status=discharging module_id=MPPT_4567
 
 // Get components
 http GET http://localhost:5000/api/components
 
 // Send power value
-http POST http://localhost:5000/api/power value=16
+http POST http://localhost:5000/api/power value=110
 
 // Get power value
 http GET http://localhost:5000/api/power
