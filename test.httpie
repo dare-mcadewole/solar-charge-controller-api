@@ -1,12 +1,12 @@
 // LOCAL TEST
 // Update components
-http PUT http://localhost:5000/api/components solar_irradiance=100 exporting=99 current_usage=12 temperature=42 humidity=96 depth_of_discharge=67 load=24V/2A battery_status=charging module_id=MPPT_4567
+http PUT http://localhost:5000/api/components solar_irradiance=100 exporting=99 current_usage=12 temperature=48 humidity=91 depth_of_discharge=67 load=24V/2A battery_status=charging module_id=MPPT_4567
 
 // Get components
 http GET http://localhost:5000/api/components
 
 // Send power value
-http POST http://localhost:5000/api/power value=31
+http POST http://localhost:5000/api/power value=16
 
 // Get power value
 http GET http://localhost:5000/api/power
@@ -15,7 +15,7 @@ http GET http://localhost:5000/api/power
 
 // CLOUD TEST
 // Update components
-http PUT https://solarchargecontroller.herokuapp.com/api/components solar_radiance=100 exporting=99 current_usage=12 temperature=42 humidity=96 depth_of_discharge=67 load=24V/2A battery_status=charging module_id=MPPT_4567
+http PUT https://solarchargecontroller.herokuapp.com/api/components solar_irradiance=100 exporting=99 current_usage=12 temperature=42 humidity=96 depth_of_discharge=67 load=24V/2A battery_status=charging module_id=MPPT_4567
 
 // Get components
 http GET https://solarchargecontroller.herokuapp.com/api/components

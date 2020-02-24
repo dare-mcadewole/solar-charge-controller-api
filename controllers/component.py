@@ -22,15 +22,15 @@ class ComponentController:
     def handle_component ():
         # GET request
         if request.method == 'GET':
-            return Component.get(component)
+            return Component.get()
 
         # PUT/PATCH request
         elif request.method in [ 'PUT', 'PATCH' ]:
             componentValues = request.get_json()
             if componentValues:
                 components = {
-                    component: componentValues.get(component)
-                    if componentValues.get(component).is_digit()
+                    component: int(componentValues.get(component))
+                    if componentValues.get(component).isdigit()
                     else componentValues.get(component)
                     for component in ALLOWED_COMPONENTS
                 }

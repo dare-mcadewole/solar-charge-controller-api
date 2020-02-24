@@ -10,9 +10,11 @@ class PowerController:
     def handle_power ():
         if request.method == 'GET':
             return Power.get_by_date()
+
         elif request.method == 'POST':
             value = request.get_json().get('value')
             if value:
+                value = int(value) if value.isdigit() else value
                 Power.save(value)
                 PusherClient.trigger_power_update({
                     'power': value

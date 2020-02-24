@@ -5,10 +5,10 @@ import pprint
 
 def get_date ():
     today = datetime.now()
-    return datetime(
-        today.year,
-        today.month,
-        today.day
+    return "{Y}-{M}-{D}".format(
+        Y=today.year,
+        M=today.month,
+        D=today.day
     )
 
 
@@ -16,8 +16,9 @@ class Power:
     @staticmethod
     def save (power):
         MongoDB.get_db().power.insert_one({
-            'power': int(power),
-            'created_date': datetime.utcnow()
+            'power': power,
+            'created_date': datetime.utcnow(),
+            'date': get_date()
         })
 
     @staticmethod
@@ -30,11 +31,10 @@ class Power:
     @staticmethod
     def get_by_date(date = get_date(), end=None):
         query = {
-            # 'created_date': {
-            #     '$gte': date,
-            #     '$lt': end
-            # } if end else date
-            'power': 34
+            'date': {
+                '$gte': date,
+                '$lt': end
+            } if end else date
         }
         results = MongoDB.get_db().power.find(query)
         powerData = list()
