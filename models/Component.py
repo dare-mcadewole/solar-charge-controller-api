@@ -1,21 +1,18 @@
 from utils.mongo import MongoDB
 
+id = {
+    '_id': '5e50976ee7ec260b92208aef'
+}
+
 
 class Component:
     @staticmethod
-    def save (component, value):
-        MongoDB.get_db().components.replace_one({
-            'component': component
-        }, {
-            'component': component,
-            'value': value
-        }, True)
+    def save (components):
+        MongoDB.get_db().components.replace_one(id, components, True)
 
     @staticmethod
-    def get (component):
-        foundComponent = MongoDB.get_db().components.find_one({
-            'component': component
-        })
+    def get ():
+        foundComponent = MongoDB.get_db().components.find_one(id)
         if foundComponent:
             del foundComponent['_id']
         return foundComponent

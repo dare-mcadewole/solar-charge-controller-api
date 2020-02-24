@@ -9,7 +9,7 @@ class PowerController:
     @as_json
     def handle_power ():
         if request.method == 'GET':
-            return Power.get()
+            return Power.get_by_date()
         elif request.method == 'POST':
             value = request.get_json().get('value')
             if value:

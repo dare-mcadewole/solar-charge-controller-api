@@ -19,30 +19,26 @@ ALLOWED_COMPONENTS = [
 class ComponentController:
     @staticmethod
     @as_json
-    def handle_component (component):
-        if component in ALLOWED_COMPONENTS:
-            # GET request
-            if request.method == 'GET':
-                return Component.get(component)
+    def handle_component ():
+        # GET request
+        if request.method == 'GET':
+            return Component.get(component)
 
-            # PUT/PATCH request
-            elif request.method in [ 'PUT', 'PATCH' ]:
-                value = request.get_json().get('value')
-                if value:
-                    Component.save(component, value)
-                    PusherClient.trigger_component_update({
-                        'component': component,
-                        'value': value
-                    })
-                    return {
-                        component: value
-                    }
-                return {
-                    'description': 'Value not found',
-                    'status': 404
+        # PUT/PATCH request
+        elif request.method in [ 'PUT', 'PATCH' ]:
+            componentValues = request.get_json()
+            if componentValues:
+                components = {
+                    component: componentValues.get(component)
+                    if componentValues.get(component).is_digit()
+                    else componentValues.get(component)
+                    for component in ALLOWED_COMPONENTS
                 }
-            return InvalidMethod
-        return {
-            'description': 'Component \'%s\' not found' % component,
-            'status': 404
-        }
+                Component.save(components)
+                PusherClient.trigger_component_update(components)
+                return components
+            return {
+                'description': 'Value not found',
+                'status': 404
+            }
+        return InvalidMethod
