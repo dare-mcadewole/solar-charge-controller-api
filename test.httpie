@@ -6,7 +6,7 @@ http PUT http://localhost:5000/api/components solar_irradiance=120 exporting=84 
 http GET http://localhost:5000/api/components
 
 // Send power value
-http POST http://localhost:5000/api/power value=110
+http POST http://localhost:5000/api/power value=50
 
 // Get power value
 http GET http://localhost:5000/api/power
