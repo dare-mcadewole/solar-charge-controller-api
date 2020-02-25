@@ -16,3 +16,17 @@ class Component:
         if foundComponent:
             del foundComponent['_id']
         return foundComponent
+
+    @staticmethod
+    def find(component):
+        return {
+            component: Component.get().get(component)
+        }
+
+    @staticmethod
+    def set (component, value):
+        components = Component.get()
+        components[component] = value
+        MongoDB.get_db().components.replace_one(
+            id, components, True
+        )

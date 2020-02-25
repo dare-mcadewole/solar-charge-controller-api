@@ -26,6 +26,14 @@ class PusherClient:
         )
 
     @staticmethod
+    def trigger_components_update (data):
+        PusherClient.get_client().trigger(
+            'solar-charge-controller',
+            'components-update',
+            data
+        )
+
+    @staticmethod
     def trigger_power_update (power):
         PusherClient.get_client().trigger(
             'solar-charge-controller',

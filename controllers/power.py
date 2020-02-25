@@ -23,7 +23,7 @@ class PowerController:
                     'power': value
                 }
             return {
-                'description': 'Value not found',
+                'desc': 'Value not found',
                 'status': 404
             }
         return InvalidMethod

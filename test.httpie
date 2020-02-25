@@ -21,7 +21,7 @@ http PUT https://solarchargecontroller.herokuapp.com/api/components solar_irradi
 http GET https://solarchargecontroller.herokuapp.com/api/components
 
 // Send power value
-http POST https://solarchargecontroller.herokuapp.com/api/power value=31
+http POST https://solarchargecontroller.herokuapp.com/api/power value=134
 
 // Get power value
 http GET https://solarchargecontroller.herokuapp.com/api/power

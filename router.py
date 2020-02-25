@@ -6,9 +6,17 @@ class Router:
     def initialize (app):
         # API rule for /api/component
         app.add_url_rule(
-            '/api/components',
+            '/api/component/<component>',
             'component',
             ComponentController.handle_component,
+            methods=[ 'GET', 'PUT', 'PATCH' ]
+        )
+
+        # API rule for /api/component
+        app.add_url_rule(
+            '/api/components',
+            'components',
+            ComponentController.handle_components,
             methods=[ 'GET', 'PUT', 'PATCH' ]
         )
 
