@@ -26,18 +26,13 @@ class ComponentController:
     @staticmethod
     @as_json
     def update_components ():
-        # PUT/PATCH request
-        return {
-            'PUT/PATCH': request.get_json(),
-            'GET': request.args
-        }
         componentValues = request.get_json() if request.method in [
             'PUT', 'PATCH'
-        ] else request.query()
+        ] else request.args
         if componentValues:
             components = {
                 component: int(componentValues.get(component))
-                if componentValues.get(component).isdigit()
+                if str(componentValues.get(component)).isdigit()
                 else componentValues.get(component)
                 for component in componentValues.keys()
                 if component in COMPONENTS
