@@ -32,8 +32,8 @@ class ComponentController:
                     component: int(componentValues.get(component))
                     if componentValues.get(component).isdigit()
                     else componentValues.get(component)
-                    for component in COMPONENTS
-                    if component in componentValues
+                    for component in componentValues.keys()
+                    if component in COMPONENTS
                 }
                 Component.save(components)
                 PusherClient.trigger_components_update(components)
@@ -53,7 +53,7 @@ class ComponentController:
 
             else:
                 value = request.get_json()
-                print('Found value to be: ', value)
+                print('Value: ', value)
                 value = value.get('value') if value else None
                 if value:
                     value = int(value) if value.isdigit() else value
