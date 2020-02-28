@@ -52,7 +52,9 @@ class ComponentController:
                 return Component.find(component)
 
             else:
-                value = request.get_json().get('value')
+                value = request.get_json()
+                print('Found value to be: ', value)
+                value = value.get('value') if value else None
                 if value:
                     value = int(value) if value.isdigit() else value
                     Component.set(component, value)
