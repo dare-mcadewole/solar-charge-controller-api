@@ -4,11 +4,14 @@ id = {
     '_id': '5e50976ee7ec260b92208aef'
 }
 
-
 class Component:
     @staticmethod
     def save (components):
-        MongoDB.get_db().components.replace_one(id, components, True)
+        matchedComponents = MongoDB.get_db().components.find_one(id)
+        del matchedComponents['_id']
+        for key in components.keys():
+            matchedComponents[key] = components[key]
+        MongoDB.get_db().components.replace_one(id, matchedComponents, True)
 
     @staticmethod
     def get ():
@@ -18,7 +21,7 @@ class Component:
         return foundComponent
 
     @staticmethod
-    def find(component):
+    def find (component):
         return {
             component: Component.get().get(component)
         }

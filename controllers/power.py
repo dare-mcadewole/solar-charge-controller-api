@@ -7,23 +7,24 @@ from utils.pusher_client import PusherClient
 class PowerController:
     @staticmethod
     @as_json
-    def handle_power ():
-        if request.method == 'GET':
-            return Power.get_by_date()
+    def get_power ():
+        return Power.get_by_date()
 
-        elif request.method == 'POST':
-            value = request.get_json().get('value')
-            if value:
-                value = int(value) if value.isdigit() else value
-                Power.save(value)
-                PusherClient.trigger_power_update({
-                    'power': value
-                })
-                return {
-                    'power': value
-                }
+    @staticmethod
+    @as_json
+    def add ():
+        value = request.get_json() if request.method == 'POST' else request.args
+        value = value.get('value') if value else None
+        if value:
+            value = int(value) if str(value).isdigit() else value
+            Power.save(value)
+            PusherClient.trigger_power_update({
+                'power': value
+            })
             return {
-                'desc': 'Value not found',
-                'status': 404
+                'power': value
             }
-        return InvalidMethod
+        return {
+            'desc': 'Value not found',
+            'status': 404
+        }

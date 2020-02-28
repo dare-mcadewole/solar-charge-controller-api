@@ -19,58 +19,70 @@ COMPONENTS = [
 class ComponentController:
     @staticmethod
     @as_json
-    def handle_components ():
+    def get_components ():
         # GET request
-        if request.method == 'GET':
-            return Component.get()
-
-        # PUT/PATCH request
-        elif request.method in [ 'PUT', 'PATCH' ]:
-            componentValues = request.get_json()
-            if componentValues:
-                components = {
-                    component: int(componentValues.get(component))
-                    if componentValues.get(component).isdigit()
-                    else componentValues.get(component)
-                    for component in componentValues.keys()
-                    if component in COMPONENTS
-                }
-                Component.save(components)
-                PusherClient.trigger_components_update(components)
-                return components
-            return {
-                'desc': 'Value not found',
-                'status': 404
-            }
-        return InvalidMethod
+        return Component.get()
 
     @staticmethod
     @as_json
-    def handle_component (component):
-        if component in COMPONENTS:
-            if request.method == 'GET':
-                return Component.find(component)
+    def update_components ():
+        # PUT/PATCH request
+        return {
+            'PUT/PATCH': request.get_json(),
+            'GET': request.args
+        }
+        componentValues = request.get_json() if request.method in [
+            'PUT', 'PATCH'
+        ] else request.query()
+        if componentValues:
+            components = {
+                component: int(componentValues.get(component))
+                if componentValues.get(component).isdigit()
+                else componentValues.get(component)
+                for component in componentValues.keys()
+                if component in COMPONENTS
+            }
+            Component.save(components)
+            PusherClient.trigger_components_update(components)
+            return components
+        return {
+            'desc': 'Value not found',
+            'status': 404
+        }
 
-            else:
-                value = request.get_json()
-                print('Value: ', value)
-                value = value.get('value') if value else None
-                if value:
-                    value = int(value) if value.isdigit() else value
-                    Component.set(component, value)
-                    PusherClient.trigger_component_update({
-                        'component': component,
-                        'value': value
-                    })
-                    return {
-                        'component': component,
-                        'value': value
-                    }
+    @staticmethod
+    @as_json
+    def get_component (component):
+        if component in COMPONENTS:
+            return Component.find(component)   
+        return {
+            'desc': 'Component not found',
+            'status': 404
+        }
+
+    @staticmethod
+    @as_json
+    def update_component (component):
+        if component in COMPONENTS:
+            value = request.get_json() if request.method in [
+                'PUT', 'PATCH'
+            ] else request.args
+            value = value.get('value') if value else None
+            if value:
+                value = int(value) if str(value).isdigit() else value
+                Component.set(component, value)
+                PusherClient.trigger_component_update({
+                    'component': component,
+                    'value': value
+                })
                 return {
-                    'desc': 'Value not found',
-                    'status': 404
+                    'component': component,
+                    'value': value
                 }
-                
+            return {
+                'desc': 'Value not found',
+                'status': 404
+            }  
         return {
             'desc': 'Component not found',
             'status': 404

@@ -1,39 +1,56 @@
 // LOCAL TEST
-// Update components
-http PUT http://localhost:5000/api/components si=120 e=84 cu=3 t=39 h=91 dod=67 l=24V/1.5A bs=discharging mi=MPPT_4567
+// Update components PUT
+http PUT http://localhost:5000/api/components/update si=120 e=84 cu=3 t=39 h=91 dod=67 l=24V/1.5A bp=discharging mi=MPPT_4567
+
+// Update components GET
+http GET http://localhost:5000/api/components/update?si=120&e=84&cu=3&t=39&h=91&dod=67&l=24V/1.5A&bs=discharging&mi=MPPT_4567
 
 // Get components
 http GET http://localhost:5000/api/components
 
-// Update component
-http PATCH http://localhost:5000/api/component/t value=36
+// Update component PUT
+http PATCH http://localhost:5000/api/component/update/t value=36
+
+// Update component GET
+http GET http://localhost:5000/api/component/update/h?value=49
 
 // Get component
 http GET http://localhost:5000/api/component/t
 
-// Send power value
-http POST http://localhost:5000/api/power value=50
+// Send power value POST
+http POST http://localhost:5000/api/power/add value=50
+
+// Send power value GET
+http GET http://localhost:5000/api/power/add?value=55
 
 // Get power value
 http GET http://localhost:5000/api/power
 
 
-
 // CLOUD TEST
-// Update components
-http PUT https://solarchargecontroller.herokuapp.com/api/components si=49 e=99 cu=12 t=42 h=96 dod=67 l=24V/2A bs=charging mi=MPPT_4567
+// Update components PUT
+http PUT https://solarchargecontroller.herokuapp.com/api/components/update si=120 e=84 cu=3 t=39 h=91 dod=67 l=24V/1.5A bp=discharging mi=MPPT_4567
+
+// Update components GET
+http GET https://solarchargecontroller.herokuapp.com/api/components/update?si=120&e=84&cu=3&t=39&h=91&dod=67&l=24V/1.5A&bs=discharging&mi=MPPT_4567
 
 // Get components
 http GET https://solarchargecontroller.herokuapp.com/api/components
 
-// Update component
-http PATCH https://solarchargecontroller.herokuapp.com/api/component/bs value=discharging
+// Update component PUT
+http PATCH https://solarchargecontroller.herokuapp.com/api/component/update/t value=36
+
+// Update component GET
+http GET https://solarchargecontroller.herokuapp.com/api/component/update/h?value=49
 
 // Get component
 http GET https://solarchargecontroller.herokuapp.com/api/component/t
 
-// Send power value
-http POST https://solarchargecontroller.herokuapp.com/api/power value=10
+// Send power value POST
+http POST https://solarchargecontroller.herokuapp.com/api/power/add value=50
+
+// Send power value GET
+http GET https://solarchargecontroller.herokuapp.com/api/power/add?value=55
 
 // Get power value
 http GET https://solarchargecontroller.herokuapp.com/api/power
