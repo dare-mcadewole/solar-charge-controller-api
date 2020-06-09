@@ -11,14 +11,14 @@ def get_date ():
         D=today.day
     )
 
-
 class Power:
     @staticmethod
-    def save (power):
+    def save (power, time):
         MongoDB.get_db().power.insert_one({
             'power': power,
             'created_date': datetime.utcnow(),
-            'date': get_date()
+            'date': get_date(),
+            'time': time
         })
 
     @staticmethod
@@ -37,5 +37,9 @@ class Power:
             } if end else date
         }
         results = MongoDB.get_db().power.find(query)
-        powerData = [ result['power'] for result in results ]
+        powerData = [{
+            'power': result.get('power'),
+            'time': result.get('time')
+        } for result in results]
+        print(powerData)
         return powerData

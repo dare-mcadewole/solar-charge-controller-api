@@ -21,7 +21,7 @@ http GET http://localhost:5000/api/component/t
 http POST http://localhost:5000/api/power/add value=50
 
 // Send power value GET
-http GET http://localhost:5000/api/power/add?value=55
+http GET http://localhost:5000/api/power/add?value=0.31
 
 // Get power value
 http GET http://localhost:5000/api/power

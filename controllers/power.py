@@ -1,5 +1,6 @@
 from flask import request
 from flask_json import as_json
+from datetime import datetime
 from utils.http_errors import InvalidMethod
 from models.Power import Power 
 from utils.pusher_client import PusherClient
@@ -17,12 +18,15 @@ class PowerController:
         value = value.get('value') if value else None
         if value:
             value = int(value) if str(value).isdigit() else value
-            Power.save(value)
+            time = str(datetime.now())
+            Power.save(value, time)
             PusherClient.trigger_power_update({
-                'power': value
+                'power': value,
+                'time': time
             })
             return {
-                'power': value
+                'power': value,
+                'time': time
             }
         return {
             'desc': 'Value not found',
